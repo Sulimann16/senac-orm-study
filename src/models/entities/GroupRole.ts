@@ -14,11 +14,11 @@ export class GroupRole {
   @PrimaryColumn({ type: "uuid", name: "role_id" })
   roleId!: string;
 
-  @ManyToOne(() => Group)
+  @ManyToOne(() => Group, (group) => group.groupRoles)
   @JoinColumn({ name: "group_id" })
   group!: Group;
 
-  @ManyToOne(() => Role)
+  @ManyToOne(() => Role, (role) => role.groupRoles)
   @JoinColumn({ name: "role_id" })
   role!: Role;
 
