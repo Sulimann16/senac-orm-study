@@ -21,11 +21,11 @@ export class UserRole {
   @PrimaryColumn({ type: "uuid", name: "role_id" })
   roleId!: string;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, (user) => user.userRoles)
   @JoinColumn({ name: "user_id" })
   user!: User;
 
-  @ManyToOne(() => Role)
+  @ManyToOne(() => Role, (role) => role.userRoles)
   @JoinColumn({ name: "role_id" })
   role!: Role;
 
