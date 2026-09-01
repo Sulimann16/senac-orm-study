@@ -4,7 +4,10 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from "typeorm";
+import { UserGroup } from "./UserGroup";
+import { GroupRole } from "./GroupRole";
 
 /**
  * Representa a tabela "groups" (grupos/times) do sistema RBAC.
@@ -26,4 +29,10 @@ export class Group {
 
   @UpdateDateColumn({ name: "updated_at" })
   updatedAt!: Date;
+
+  @OneToMany(() => UserGroup, (userGroup) => userGroup.group)
+  userGroups!: UserGroup[];
+
+  @OneToMany(() => GroupRole, (groupRole) => groupRole.group)
+  groupRoles!: GroupRole[];
 }
