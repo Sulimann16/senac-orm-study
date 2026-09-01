@@ -4,7 +4,10 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from "typeorm";
+import { UserRole } from "./UserRole";
+import { UserGroup } from "./UserGroup";
 
 /**
  * Entidade = mapeamento de uma tabela do banco de dados.
@@ -38,4 +41,10 @@ export class User {
 
   @UpdateDateColumn({ name: "updated_at" })
   updatedAt!: Date;
+
+  @OneToMany(() => UserRole, (userRole) => userRole.user)
+  userRoles!: UserRole[];
+
+  @OneToMany(() => UserGroup, (userGroup) => userGroup.user)
+  userGroups!: UserGroup[];
 }
