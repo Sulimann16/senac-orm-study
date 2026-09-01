@@ -4,7 +4,11 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from "typeorm";
+import { UserRole } from "./UserRole";
+import { RolePermission } from "./RolePermission";
+import { GroupRole } from "./GroupRole";
 
 /**
  * Representa a tabela "roles" (papéis) do sistema RBAC.
@@ -29,4 +33,13 @@ export class Role {
 
   @UpdateDateColumn({ name: "updated_at" })
   updatedAt!: Date;
+
+  @OneToMany(() => UserRole, (userRole) => userRole.role)
+  userRoles!: UserRole[];
+
+  @OneToMany(() => RolePermission, (rolePermission) => rolePermission.role)
+  rolePermissions!: RolePermission[];
+
+  @OneToMany(() => GroupRole, (groupRole) => groupRole.role)
+  groupRoles!: GroupRole[];
 }
