@@ -13,11 +13,11 @@ export class UserGroup {
   @PrimaryColumn({ type: "uuid", name: "group_id" })
   groupId!: string;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, (user) => user.userGroups)
   @JoinColumn({ name: "user_id" })
   user!: User;
 
-  @ManyToOne(() => Group)
+  @ManyToOne(() => Group, (group) => group.userGroups)
   @JoinColumn({ name: "group_id" })
   group!: Group;
 
