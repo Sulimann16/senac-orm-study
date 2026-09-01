@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from "typeorm";
+import { RolePermission } from "./RolePermission";
 
 /*
  Representa a tabela "permissions" do sistema RBAC.
@@ -23,4 +24,7 @@ export class Permission {
 
   @CreateDateColumn({ name: "created_at" })
   createdAt!: Date;
+
+  @OneToMany(() => RolePermission, (rolePermission) => rolePermission.permission)
+  rolePermissions!: RolePermission[];
 }
